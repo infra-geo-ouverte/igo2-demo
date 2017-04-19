@@ -19,15 +19,19 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/openlayers/dist/ol.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/openlayers/dist/ol.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
+  ],
+  "addons": [
+    "assets/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
   ],
   "e2e": {
     "protractor": {

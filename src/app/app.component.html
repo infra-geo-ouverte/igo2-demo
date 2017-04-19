@@ -1,3 +1,15 @@
-<h1>
-  {{title}}
-</h1>
+<igo-map-browser
+  [map]="map"
+  [view]="mapView"
+  igoOverlay>
+  <igo-zoom [map]="map" color="primary"></igo-zoom>
+</igo-map-browser>
+
+<igo-search-bar
+  [placeholder]="'Search'"
+  (search)="handleSearch($event)">
+</igo-search-bar>
+
+<igo-feature-list></igo-feature-list>
+
+<igo-feature-details [feature]="featureService.selectedFeature$ | async"></igo-feature-details>

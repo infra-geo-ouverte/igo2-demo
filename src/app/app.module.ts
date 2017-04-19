@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { MaterialModule } from '@angular/material';
+
+import { IgoModule, provideDefaultSearchSources } from 'igo2';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,9 +16,11 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MaterialModule.forRoot(),
+    IgoModule.forRoot()
   ],
-  providers: [],
+  providers: [...provideDefaultSearchSources()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
