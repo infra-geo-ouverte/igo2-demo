@@ -1,18 +1,31 @@
 import { TestBed, async } from '@angular/core/testing';
+import { Http } from '@angular/http';
 
-import { IgoModule, provideDefaultSearchSources } from 'igo2';
+import { IgoModule, provideDefaultSearchSources,
+  LanguageLoader, provideLanguageService } from 'igo2';
+import { NavigatorModule } from './navigator/navigator.module';
 import { AppComponent } from './app.component';
+
+export function translateLoader(http: Http) {
+  return new LanguageLoader(http, './base/src/assets/locale/', '.json');
+}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        NavigatorModule,
         IgoModule.forRoot()
       ],
       declarations: [
         AppComponent
       ],
-      providers: [...provideDefaultSearchSources()]
+      providers: [
+        ...provideDefaultSearchSources(),
+        provideLanguageService({
+          loader: translateLoader
+        })
+      ]
     }).compileComponents();
   }));
 

@@ -1,0 +1,22 @@
+<igo-map-browser
+  [map]="map"
+  [view]="mapView"
+  igoOverlay>
+  <igo-zoom [map]="map" color="primary"></igo-zoom>
+</igo-map-browser>
+
+<igo-search-bar
+  [placeholder]="'Search' | translate">
+</igo-search-bar>
+
+<igo-feature-list
+      igoFeatureListBehavior
+      [focusFirst]="true"
+      (focus)="handleFeatureFocus($event)"
+      (select)="handleFeatureSelect($event)">
+</igo-feature-list>
+
+<igo-feature-details [feature]="feature$ | async"></igo-feature-details>
+
+
+<igo-layer-list [layers]="map.layers$ | async"></igo-layer-list>

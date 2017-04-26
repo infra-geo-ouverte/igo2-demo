@@ -1,13 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http } from '@angular/http';
 
 import { MaterialModule } from '@angular/material';
 
-import { IgoModule, provideDefaultSearchSources } from 'igo2';
+import { IgoModule, provideDefaultSearchSources,
+         LanguageLoader, provideLanguageService } from 'igo2';
 
+import { NavigatorModule } from './navigator/navigator.module';
 import { AppComponent } from './app.component';
+
+export function translateLoader(http: Http) {
+  return new LanguageLoader(http, './assets/locale/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -15,12 +20,16 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
     MaterialModule.forRoot(),
-    IgoModule.forRoot()
+    IgoModule.forRoot(),
+    NavigatorModule
   ],
-  providers: [...provideDefaultSearchSources()],
+  providers: [
+    ...provideDefaultSearchSources(),
+    provideLanguageService({
+      loader: translateLoader
+    })
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
